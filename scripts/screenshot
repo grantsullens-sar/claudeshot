@@ -104,10 +104,24 @@ WEB_WIDTH=1280
 WEB_HEIGHT=800
 WEB_FULL_PAGE=true
 
-# Load defaults from config file if it exists
+# Load defaults from config file if it exists (safe parsing, no code execution)
 CONFIG_FILE=".claudeshot.conf"
 if [[ -f "$CONFIG_FILE" ]]; then
-    source "$CONFIG_FILE"
+    while IFS='=' read -r key value; do
+        # Skip comments and empty lines
+        [[ "$key" =~ ^#.*$ || -z "$key" ]] && continue
+        # Remove quotes from value
+        value="${value%\"}"
+        value="${value#\"}"
+        value="${value%\'}"
+        value="${value#\'}"
+        # Only allow known config keys
+        case "$key" in
+            MODE|RESIZE|WEB_WIDTH|WEB_HEIGHT|WEB_FULL_PAGE|QUIET|CLIPBOARD|USE_TMP)
+                declare "$key=$value"
+                ;;
+        esac
+    done < "$CONFIG_FILE"
 fi
 
 # Open file manager
