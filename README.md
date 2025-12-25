@@ -13,10 +13,11 @@ I built this because I kept wanting Claude to see what I was looking at - error 
 ## Install
 
 ```bash
-claude --plugin-dir /path/to/claudeshot
+git clone https://github.com/naieum/claudeshot.git ~/.claude-plugins/claudeshot
+claude --plugin-dir ~/.claude-plugins/claudeshot
 ```
 
-Or clone it somewhere and point to that directory.
+Or add it permanently to your settings so it loads every session.
 
 ## Usage
 
