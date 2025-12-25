@@ -43,14 +43,11 @@ Capture full-page screenshots of websites (great for reviewing your work):
 /screenshot --web http://localhost:3000 --small # Compressed for fewer tokens
 ```
 
-**Device presets:**
+**Viewports:**
 - `--mobile` - iPhone viewport (390x844)
 - `--tablet` - iPad viewport (768x1024)
-
-**Other web options:**
-- `--web-width PX` - Custom browser width
-- `--web-height PX` - Custom viewport height
-- `--web-viewport` - Capture only visible viewport (not full page)
+- `--viewport WxH` - Custom dimensions (e.g., `--viewport 375x667`)
+- `--web-viewport` - Capture only visible area (not full page)
 
 ## Token-Saving Options
 
@@ -75,9 +72,8 @@ ${CLAUDE_PLUGIN_ROOT}/scripts/screenshot [OPTIONS] [PROMPT]
 | `--web URL` | Full-page web screenshot |
 | `--mobile` | Mobile viewport (390x844) |
 | `--tablet` | Tablet viewport (768x1024) |
-| `--web-width PX` | Custom browser width |
-| `--web-height PX` | Custom viewport height |
-| `--web-viewport` | Capture only viewport |
+| `--viewport WxH` | Custom viewport (e.g., 375x667) |
+| `--web-viewport` | Capture only visible area |
 | `-ht, --hide-terminal` | Minimize terminal (macOS) |
 | `-d, --delay SECS` | Wait before capturing |
 | `-c, --clipboard` | Copy to clipboard |

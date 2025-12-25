@@ -23,6 +23,7 @@
 #   --web-viewport        Capture only visible viewport
 #   --mobile              Mobile viewport (390x844 - iPhone 14)
 #   --tablet              Tablet viewport (768x1024 - iPad)
+#   --viewport WxH        Custom viewport (e.g., 375x667)
 #   --clear               Clear all screenshots from current session (with confirmation)
 #   --clear-yes           Clear all session screenshots without confirmation
 #   --cleanup             Delete screenshots older than 1 hour
@@ -228,6 +229,16 @@ while [[ $# -gt 0 ]]; do
             WEB_WIDTH=768
             WEB_HEIGHT=1024
             shift
+            ;;
+        --viewport)
+            if [[ "$2" == *x* ]]; then
+                WEB_WIDTH="${2%x*}"
+                WEB_HEIGHT="${2#*x}"
+            else
+                echo "Error: --viewport requires WxH format (e.g., 375x667)" >&2
+                exit 1
+            fi
+            shift 2
             ;;
         --open)
             if [[ -d "$SCREENSHOT_DIR" ]]; then

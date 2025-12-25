@@ -114,8 +114,7 @@ Check how your site looks on phone and tablet:
 --web URL         screenshot a webpage
 --mobile          mobile viewport (390x844)
 --tablet          tablet viewport (768x1024)
---web-width PX    custom browser width
---web-height PX   custom viewport height
+--viewport WxH    custom viewport (e.g., 375x667)
 --web-viewport    just the viewport, not full page
 -d, --delay N     wait N seconds before capture
 -c, --clipboard   copy to clipboard too
