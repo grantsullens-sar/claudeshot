@@ -89,6 +89,22 @@ When iterating on a component, I'll just keep screenshotting:
 
 Fix, screenshot again, repeat. The `--tiny` flag keeps token usage low so you can do this all day.
 
+**Testing mobile layouts**
+
+Check how your site looks on phone and tablet:
+
+```
+/screenshot --web http://localhost:3000 --mobile
+```
+
+"The nav hamburger menu isn't showing. The breakpoint should kick in at this width."
+
+```
+/screenshot --web http://localhost:3000 --tablet
+```
+
+"Looks good on tablet but the cards should be 2 columns, not 3."
+
 ## All the flags
 
 ```
@@ -96,8 +112,10 @@ Fix, screenshot again, repeat. The `--tiny` flag keeps token usage low so you ca
 --tiny            resize to 640px width
 --resize WxH      custom size (e.g. --resize 800x600)
 --web URL         screenshot a webpage
---web-width PX    browser width (default 1280)
---web-height PX   viewport height (default 800)
+--mobile          mobile viewport (390x844)
+--tablet          tablet viewport (768x1024)
+--web-width PX    custom browser width
+--web-height PX   custom viewport height
 --web-viewport    just the viewport, not full page
 -d, --delay N     wait N seconds before capture
 -c, --clipboard   copy to clipboard too

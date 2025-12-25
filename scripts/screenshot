@@ -21,6 +21,8 @@
 #   --web-height PX       Browser viewport height (default: 800)
 #   --web-full            Capture full scrollable page (default for --web)
 #   --web-viewport        Capture only visible viewport
+#   --mobile              Mobile viewport (390x844 - iPhone 14)
+#   --tablet              Tablet viewport (768x1024 - iPad)
 #   --clear               Clear all screenshots from current session (with confirmation)
 #   --clear-yes           Clear all session screenshots without confirmation
 #   --cleanup             Delete screenshots older than 1 hour
@@ -36,7 +38,8 @@
 #   screenshot -m full --small           # Full screen, resized for fewer tokens
 #   screenshot --tiny                    # Selection, max compression
 #   screenshot --web http://localhost:3000              # Full-page web screenshot
-#   screenshot --web http://localhost:3000 --web-viewport  # Just viewport
+#   screenshot --web http://localhost:3000 --mobile     # Mobile viewport
+#   screenshot --web http://localhost:3000 --tablet     # Tablet viewport
 #   screenshot -t                        # Save to /tmp instead
 #   screenshot -d 3 -m full              # 3 second delay, then full screen
 #   screenshot "fix this button"         # Screenshot with context for Claude
@@ -214,6 +217,16 @@ while [[ $# -gt 0 ]]; do
             ;;
         --web-viewport)
             WEB_FULL_PAGE=false
+            shift
+            ;;
+        --mobile)
+            WEB_WIDTH=390
+            WEB_HEIGHT=844
+            shift
+            ;;
+        --tablet)
+            WEB_WIDTH=768
+            WEB_HEIGHT=1024
             shift
             ;;
         --open)
