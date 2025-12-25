@@ -45,16 +45,49 @@ To save tokens, add `--small` (1280px) or `--tiny` (640px):
 
 The `--tiny` flag cuts file size by about 95%. Still readable, way fewer tokens.
 
-## The workflow I use
+## Examples
 
-When building a UI, I'll do something like:
+**Replicating a design**
 
-1. Screenshot a site I want to reference: `/screenshot --web https://stripe.com --small`
-2. Ask Claude to build something similar
-3. Screenshot my localhost to check the result: `/screenshot --web http://localhost:3000 --small`
-4. Point out what's off, iterate
+I wanted a landing page similar to Stripe's. Instead of describing it:
 
-It's faster than copy-pasting descriptions of what things look like.
+```
+/screenshot --web https://stripe.com --small
+```
+
+"Build me a hero section like this but for a developer tool."
+
+Then check my work:
+
+```
+/screenshot --web http://localhost:3000 --small
+```
+
+"The spacing on the nav feels off. Can you fix it?"
+
+**Debugging UI issues**
+
+Something looks wrong but it's hard to describe:
+
+```
+/screenshot
+```
+
+Select the broken area and say "This dropdown is rendering behind the modal. Why?"
+
+Way faster than trying to explain what's happening.
+
+**Quick feedback loop**
+
+When iterating on a component, I'll just keep screenshotting:
+
+```
+/screenshot --web http://localhost:3000/dashboard --tiny
+```
+
+"The sidebar is too wide. Also the icons aren't aligned."
+
+Fix, screenshot again, repeat. The `--tiny` flag keeps token usage low so you can do this all day.
 
 ## All the flags
 
