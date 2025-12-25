@@ -24,6 +24,7 @@
 #   --mobile              Mobile viewport (390x844 - iPhone 14)
 #   --tablet              Tablet viewport (768x1024 - iPad)
 #   --viewport WxH        Custom viewport (e.g., 375x667)
+#   --fullpage            Capture full scrollable page (default for --web)
 #   --clear               Clear all screenshots from current session (with confirmation)
 #   --clear-yes           Clear all session screenshots without confirmation
 #   --cleanup             Delete screenshots older than 1 hour
@@ -239,6 +240,10 @@ while [[ $# -gt 0 ]]; do
                 exit 1
             fi
             shift 2
+            ;;
+        --fullpage)
+            WEB_FULL_PAGE=true
+            shift
             ;;
         --open)
             if [[ -d "$SCREENSHOT_DIR" ]]; then

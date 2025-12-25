@@ -47,7 +47,8 @@ Capture full-page screenshots of websites (great for reviewing your work):
 - `--mobile` - iPhone viewport (390x844)
 - `--tablet` - iPad viewport (768x1024)
 - `--viewport WxH` - Custom dimensions (e.g., `--viewport 375x667`)
-- `--web-viewport` - Capture only visible area (not full page)
+- `--fullpage` - Capture full scrollable page (default)
+- `--web-viewport` - Capture only visible area
 
 ## Token-Saving Options
 
@@ -73,7 +74,8 @@ ${CLAUDE_PLUGIN_ROOT}/scripts/screenshot [OPTIONS] [PROMPT]
 | `--mobile` | Mobile viewport (390x844) |
 | `--tablet` | Tablet viewport (768x1024) |
 | `--viewport WxH` | Custom viewport (e.g., 375x667) |
-| `--web-viewport` | Capture only visible area |
+| `--fullpage` | Full scrollable page (default) |
+| `--web-viewport` | Visible area only |
 | `-ht, --hide-terminal` | Minimize terminal (macOS) |
 | `-d, --delay SECS` | Wait before capturing |
 | `-c, --clipboard` | Copy to clipboard |

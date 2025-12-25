@@ -115,7 +115,8 @@ Check how your site looks on phone and tablet:
 --mobile          mobile viewport (390x844)
 --tablet          tablet viewport (768x1024)
 --viewport WxH    custom viewport (e.g., 375x667)
---web-viewport    just the viewport, not full page
+--fullpage        capture full scrollable page (default)
+--web-viewport    just the visible viewport
 -d, --delay N     wait N seconds before capture
 -c, --clipboard   copy to clipboard too
 -t, --tmp         save to /tmp instead of .claudeshots
