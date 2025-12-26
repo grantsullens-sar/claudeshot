@@ -110,6 +110,23 @@ When iterating on a component, I'll just keep screenshotting:
 
 Fix, screenshot again, repeat. The `--tiny` flag keeps token usage low so you can do this all day.
 
+**Automated workflow**
+
+You can ask Claude to screenshot and iterate without stopping:
+
+"Build me a landing page. Screenshot it when you're done and fix any issues you see."
+
+Claude will:
+1. Build the page
+2. Run `/screenshot --web http://localhost:3000 --small`
+3. Look at the result
+4. Fix problems and screenshot again
+
+Works great for:
+- "Make this look like stripe.com" (screenshots reference, builds, screenshots result, compares)
+- "The layout is broken on mobile" (screenshots with `--mobile`, sees the issue, fixes it)
+- "Style this form" (iterates until it looks right)
+
 **Testing mobile layouts**
 
 Check how your site looks on phone and tablet:
