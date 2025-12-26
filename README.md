@@ -127,6 +127,26 @@ Works great for:
 - "The layout is broken on mobile" (screenshots with `--mobile`, sees the issue, fixes it)
 - "Style this form" (iterates until it looks right)
 
+**Using a design reference**
+
+Want to build something inspired by an existing site? Have Claude screenshot it first:
+
+"Screenshot stripe.com and use it as a reference. Build me a similar hero section for my developer tool."
+
+Claude will:
+1. Screenshot the reference site
+2. Analyze the layout, colors, spacing, typography
+3. Build something similar for your project
+4. Screenshot the result and compare
+
+You can also save references for later:
+
+```
+/screenshot --web https://stripe.com -o examples/stripe-reference.png
+```
+
+Then tell Claude: "Use examples/stripe-reference.png as a design reference for this page."
+
 **Testing mobile layouts**
 
 Check how your site looks on phone and tablet:
