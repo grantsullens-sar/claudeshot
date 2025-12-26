@@ -175,6 +175,7 @@ Check how your site looks on phone and tablet:
 --viewport WxH    custom viewport (e.g., 375x667)
 --fullpage        capture full scrollable page (default)
 --web-viewport    just the visible viewport
+--browser NAME    use specific browser (chrome, firefox, edge, safari)
 -d, --delay N     wait N seconds before capture
 -c, --clipboard   copy to clipboard too
 -t, --tmp         save to /tmp instead of .claudeshots
@@ -204,7 +205,19 @@ Works on macOS, Linux, and Windows.
 - macOS uses the built-in `screencapture`
 - Linux uses whatever you have installed (gnome-screenshot, scrot, maim, etc.)
 - Windows uses PowerShell or Snipping Tool
-- Web screenshots need Chrome or Chromium installed
+
+Web screenshots support multiple browsers:
+- Chrome/Chromium (default, best full-page support)
+- Firefox (native `--screenshot` support)
+- Edge (same as Chrome, Chromium-based)
+- Safari (macOS only, limited - see note below)
+
+**Safari note:** Apple never added headless screenshot support to Safari. Unlike every other browser, Safari has no `--headless --screenshot` option. We work around this with AppleScript, but it opens a visible Safari window briefly and can only capture the viewport (no full-page scroll capture). For headless screenshots, use Chrome or Firefox.
+
+Auto-detects installed browsers. Use `--browser` to pick one:
+```
+/screenshot --web https://example.com --browser firefox
+```
 
 ## Files
 
