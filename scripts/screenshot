@@ -51,6 +51,38 @@
 
 set -e
 
+# Security: validate inputs
+validate_path() {
+    local path="$1"
+    # Block obvious injection attempts
+    if [[ "$path" == *"'"* ]] || [[ "$path" == *'"'* ]] || [[ "$path" == *'$('* ]] || [[ "$path" == *'`'* ]] || [[ "$path" == *';'* ]]; then
+        echo "Error: Invalid characters in path" >&2
+        exit 1
+    fi
+}
+
+validate_number() {
+    local num="$1"
+    if ! [[ "$num" =~ ^[0-9]+$ ]]; then
+        echo "Error: Expected number, got: $num" >&2
+        exit 1
+    fi
+}
+
+validate_url() {
+    local url="$1"
+    # Must start with http:// or https://
+    if ! [[ "$url" =~ ^https?:// ]]; then
+        echo "Error: URL must start with http:// or https://" >&2
+        exit 1
+    fi
+    # Block shell metacharacters
+    if [[ "$url" == *'$('* ]] || [[ "$url" == *'`'* ]] || [[ "$url" == *';'* ]]; then
+        echo "Error: Invalid characters in URL" >&2
+        exit 1
+    fi
+}
+
 # Detect OS
 detect_os() {
     case "$(uname -s)" in
@@ -170,6 +202,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         -d|--delay)
+            validate_number "$2"
             DELAY="$2"
             shift 2
             ;;
@@ -178,6 +211,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         -o|--output)
+            validate_path "$2"
             OUTPUT="$2"
             shift 2
             ;;
@@ -198,18 +232,29 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --resize)
+            # Validate resize: either number or WxH format
+            if [[ "$2" == *x* ]]; then
+                local rw="${2%x*}" rh="${2#*x}"
+                validate_number "$rw"
+                validate_number "$rh"
+            else
+                validate_number "$2"
+            fi
             RESIZE="$2"
             shift 2
             ;;
         --web)
+            validate_url "$2"
             WEB_URL="$2"
             shift 2
             ;;
         --web-width)
+            validate_number "$2"
             WEB_WIDTH="$2"
             shift 2
             ;;
         --web-height)
+            validate_number "$2"
             WEB_HEIGHT="$2"
             shift 2
             ;;
@@ -235,6 +280,8 @@ while [[ $# -gt 0 ]]; do
             if [[ "$2" == *x* ]]; then
                 WEB_WIDTH="${2%x*}"
                 WEB_HEIGHT="${2#*x}"
+                validate_number "$WEB_WIDTH"
+                validate_number "$WEB_HEIGHT"
             else
                 echo "Error: --viewport requires WxH format (e.g., 375x667)" >&2
                 exit 1
