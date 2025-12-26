@@ -374,9 +374,10 @@ if [[ -z "$OUTPUT" ]]; then
 fi
 
 # Hide terminal if requested (macOS only)
+# Uses visibility toggle instead of minimize to avoid dock animation
 if [[ "$HIDE_TERMINAL" == true ]] && [[ "$OS" == "macos" ]]; then
-    osascript -e 'tell application "Terminal" to set miniaturized of front window to true' 2>/dev/null || true
-    sleep 0.3
+    osascript -e 'tell application "System Events" to set visible of process "Terminal" to false' 2>/dev/null || true
+    sleep 0.2
 fi
 
 # Apply delay if specified
@@ -704,7 +705,8 @@ fi
 
 # Restore terminal if it was hidden (macOS)
 if [[ "$HIDE_TERMINAL" == true ]] && [[ "$OS" == "macos" ]]; then
-    osascript -e 'tell application "Terminal" to set miniaturized of front window to false' 2>/dev/null || true
+    osascript -e 'tell application "System Events" to set visible of process "Terminal" to true' 2>/dev/null || true
+    osascript -e 'tell application "Terminal" to activate' 2>/dev/null || true
 fi
 
 # Check if screenshot was captured
