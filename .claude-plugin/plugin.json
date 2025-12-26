@@ -5,6 +5,5 @@
   "author": {
     "name": "naieum"
   },
-  "repository": "https://github.com/naieum/claudeshot",
-  "platforms": ["macos", "linux", "windows"]
+  "repository": "https://github.com/grantsullens-sar/claudeshot"
 }
